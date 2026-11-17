@@ -1,0 +1,71 @@
+<!-- Section 2: encryption and decryption (logic: static/js/cipher.js and tabs.js) -->
+<section id="workspace" class="section" aria-labelledby="workspace-heading">
+  <div class="section-header">
+    <div class="section-heading">
+      <span class="section-number" aria-hidden="true">2</span>
+      <div>
+        <h2 id="workspace-heading" class="section-title">Encrypt &amp; decrypt</h2>
+        <p class="section-subtitle">Uses the active key from section 1.</p>
+      </div>
+    </div>
+    <div class="tab-list" role="tablist" aria-label="Operation">
+      <button id="tabEncrypt" class="tab" role="tab" aria-selected="true" aria-controls="panelEncrypt">Encrypt</button>
+      <button id="tabDecrypt" class="tab" role="tab" aria-selected="false" aria-controls="panelDecrypt" tabindex="-1">Decrypt</button>
+    </div>
+  </div>
+
+  <!-- Encrypt tab -->
+  <div id="panelEncrypt" class="section-body" role="tabpanel" aria-labelledby="tabEncrypt">
+    <div class="grid gap-6 lg:grid-cols-2">
+      <div class="panel">
+        <label for="encryptInput" class="label">Text to encrypt</label>
+        <textarea id="encryptInput" rows="6" maxlength="{{ max_text_length }}" class="field resize-y leading-relaxed"
+                  placeholder="e.g. HIDE THE GOLD IN THE TREE STUMP"></textarea>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <button id="encryptBtn" type="button" class="btn-primary">Encrypt</button>
+          <button id="encryptClearBtn" type="button" class="btn-outline">Clear</button>
+        </div>
+      </div>
+
+      <div class="panel-result">
+        <p class="label">Ciphertext</p>
+        <div id="encryptOutput" class="output-box output-empty" aria-live="polite">&mdash;</div>
+        <p id="encryptPairs" class="hint mt-3 hidden"></p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <button id="encryptCopyBtn" type="button" class="btn-accent" disabled>Copy ciphertext</button>
+          <button id="encryptStepsBtn" type="button" class="btn-outline" disabled>View steps</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decrypt tab -->
+  <div id="panelDecrypt" class="section-body hidden" role="tabpanel" aria-labelledby="tabDecrypt">
+    <div class="grid gap-6 lg:grid-cols-2">
+      <div class="panel">
+        <label for="decryptInput" class="label">Ciphertext to decrypt</label>
+        <textarea id="decryptInput" rows="6" maxlength="{{ max_text_length }}" class="field resize-y font-mono uppercase leading-relaxed tracking-wider placeholder:normal-case placeholder:tracking-normal"
+                  placeholder="e.g. BMODZBXDNABEKUDMUIXMMOUVIF"></textarea>
+        <label class="mt-4 flex cursor-pointer items-center gap-3 text-base text-slate-700">
+          <input id="removeFillers" type="checkbox" class="checkbox" checked>
+          Remove filler X letters added during encryption
+        </label>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <button id="decryptBtn" type="button" class="btn-primary">Decrypt</button>
+          <button id="decryptClearBtn" type="button" class="btn-outline">Clear</button>
+        </div>
+      </div>
+
+      <div class="panel-result">
+        <p class="label">Decrypted text</p>
+        <div id="decryptOutput" class="output-box output-empty" aria-live="polite">&mdash;</div>
+        <p id="decryptInfo" class="hint mt-3 hidden"></p>
+        <p id="decryptPairs" class="hint mt-2 hidden"></p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <button id="decryptCopyBtn" type="button" class="btn-accent" disabled>Copy text</button>
+          <button id="decryptStepsBtn" type="button" class="btn-outline" disabled>View steps</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

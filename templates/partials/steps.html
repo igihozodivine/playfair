@@ -1,0 +1,116 @@
+<!-- Section 3: step-by-step explanation (logic: static/js/steps.js) -->
+<section id="explanation" class="section" aria-labelledby="explain-heading">
+  <div class="section-header">
+    <div class="section-heading">
+      <span class="section-number" aria-hidden="true">3</span>
+      <div>
+        <h2 id="explain-heading" class="section-title">How it works, step by step</h2>
+        <p id="explainSubtitle" class="section-subtitle">Encrypt or decrypt something to see each letter pair transformed.</p>
+      </div>
+    </div>
+    <div class="tab-list" role="group" aria-label="Choose operation to explain">
+      <button id="explainEncBtn" type="button" class="tab" aria-pressed="false" disabled>Encryption</button>
+      <button id="explainDecBtn" type="button" class="tab" aria-pressed="false" disabled>Decryption</button>
+    </div>
+  </div>
+
+  <div id="explainContent" class="section-body hidden space-y-8">
+
+    <!-- All letter pairs: click one to inspect it -->
+    <div>
+      <p class="label">Letter pairs <span class="font-normal text-slate-600">(click one)</span></p>
+      <div id="exPairs" class="flex max-h-56 flex-wrap gap-2.5 overflow-y-auto p-1"></div>
+    </div>
+
+    <!-- Current pair: matrix on the left, explanation on the right -->
+    <div class="grid items-start gap-8 lg:grid-cols-2">
+      <div>
+        <div id="stepMatrix" class="matrix-grid" aria-label="Matrix with the current pair highlighted"></div>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-swatch cell-input"></span>Input</span>
+          <span class="legend-item"><span class="legend-swatch cell-output"></span>Output</span>
+          <span class="legend-item"><span class="legend-swatch cell-region"></span>Rule area</span>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <p class="text-lg font-semibold text-slate-600">Pair <span id="stepIndex">1</span> of <span id="stepTotal">1</span></p>
+          <span id="stepRule" class="pill"></span>
+        </div>
+        <div class="step-pair">
+          <span id="stepInput" class="text-brand-700"></span>
+          <span class="text-4xl text-slate-400" aria-hidden="true">&rarr;</span>
+          <span id="stepOutput" class="text-accent-600"></span>
+        </div>
+        <p id="stepMapping" class="mt-4 font-mono text-lg text-slate-700"></p>
+        <p id="stepExplanation" class="mt-4 text-lg leading-relaxed text-slate-800"></p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <button id="stepPrevBtn" type="button" class="btn-outline">&larr; Previous</button>
+          <button id="stepPlayBtn" type="button" class="btn-primary">Play all</button>
+          <button id="stepNextBtn" type="button" class="btn-outline">Next &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Extra details, hidden until opened -->
+    <details class="disclosure">
+      <summary class="disclosure-summary">
+        Show full details (text stages, all pairs, rules)
+        <span aria-hidden="true">&#9662;</span>
+      </summary>
+      <div class="space-y-8 border-t border-slate-200 p-5">
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="tile">
+            <p class="tile-label">Original input</p>
+            <p id="exOriginal" class="tile-value whitespace-pre-wrap"></p>
+          </div>
+          <div class="tile">
+            <p class="tile-label">Normalised (A&ndash;Z, J&rarr;I)</p>
+            <p id="exNormalized" class="tile-value tracking-wider"></p>
+          </div>
+          <div class="tile">
+            <p id="exPreparedLabel" class="tile-label">Prepared pairs</p>
+            <p id="exPrepared" class="tile-value tracking-wider"></p>
+          </div>
+          <div class="tile tile-result">
+            <p id="exResultLabel" class="tile-label">Result</p>
+            <p id="exResult" class="tile-value font-bold tracking-wider"></p>
+          </div>
+        </div>
+
+        <ul id="exNotes" class="list-disc space-y-2 pl-6 text-base text-slate-700"></ul>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Pair</th>
+                <th scope="col">Positions (row, col)</th>
+                <th scope="col">Rule</th>
+                <th scope="col">Result</th>
+              </tr>
+            </thead>
+            <tbody id="stepTable"></tbody>
+          </table>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-3">
+          <div class="rule-card rule-card-row">
+            <p class="rule-card-title">Rule 1 &middot; Same row</p>
+            <p class="hint mt-2">Encrypt: letter to the right. Decrypt: letter to the left. Wraps around.</p>
+          </div>
+          <div class="rule-card rule-card-column">
+            <p class="rule-card-title">Rule 2 &middot; Same column</p>
+            <p class="hint mt-2">Encrypt: letter below. Decrypt: letter above. Wraps around.</p>
+          </div>
+          <div class="rule-card rule-card-rectangle">
+            <p class="rule-card-title">Rule 3 &middot; Rectangle</p>
+            <p class="hint mt-2">Each letter takes the letter in its own row and the other letter&rsquo;s column.</p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>

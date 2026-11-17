@@ -1,0 +1,164 @@
+/*
+ * components.css - Reusable style classes for the whole page.
+ *
+ * This file is inserted into <style type="text/tailwindcss"> in index.html,
+ * so "@apply" can combine Tailwind utilities into one named class.
+ * Change a class here once and every element using it updates.
+ * Colours "brand" and "accent" are defined in static/js/tailwind.config.js.
+ */
+
+@layer base {
+  body { @apply bg-slate-100 font-sans text-lg text-slate-800 antialiased; }
+  ::selection { @apply bg-brand-200 text-brand-950; }
+  summary::-webkit-details-marker { display: none; }
+}
+
+@layer components {
+
+  /* ---------- Top bar (sticky) and intro ---------- */
+  .top-bar          { @apply sticky top-0 z-40 border-b border-white/10 bg-brand-950/95 text-white shadow-lg shadow-brand-950/20 backdrop-blur; }
+  .hero             { @apply relative overflow-hidden bg-gradient-to-br from-brand-950 via-brand-900 to-slate-900 text-white; }
+  .hero-step        { @apply inline-flex items-center gap-2.5 rounded-full bg-white/10 py-2 pl-2 pr-4 text-base font-semibold text-white ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40; }
+  .hero-step-number { @apply grid h-7 w-7 place-items-center rounded-full bg-white text-sm font-bold text-brand-800; }
+
+  /* ---------- "Learn Playfair" pop-up ---------- */
+  .dialog { @apply m-auto max-h-[90vh] w-[min(36rem,calc(100%-2rem))] overflow-y-auto rounded-3xl border border-slate-200 p-0 text-slate-800 shadow-2xl backdrop:bg-slate-950/60 backdrop:backdrop-blur-sm open:animate-slide-up; }
+
+  /* ---------- Page sections (the four white cards) ---------- */
+  .section          { @apply scroll-mt-24 rounded-3xl border border-slate-200 bg-white shadow-sm shadow-slate-300/40; }
+  .section-header   { @apply flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 px-5 py-5 sm:px-8; }
+  .section-heading  { @apply flex items-center gap-4; }
+  .section-number   { @apply grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-600 text-xl font-bold text-white shadow-md shadow-brand-600/30; }
+  .section-title    { @apply text-2xl font-bold tracking-tight text-slate-900; }
+  .section-subtitle { @apply mt-0.5 text-base text-slate-600; }
+  .section-body     { @apply p-5 sm:p-8; }
+
+  /* ---------- Panels inside a section ---------- */
+  .panel        { @apply rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6; }
+  .panel-result { @apply rounded-2xl border border-accent-200 bg-accent-50/70 p-5 sm:p-6; }
+
+  /* ---------- Text ---------- */
+  .label { @apply mb-2 block text-lg font-semibold text-slate-800; }
+  .hint  { @apply text-base text-slate-600; }
+
+  /* ---------- Form fields ---------- */
+  .field    { @apply w-full rounded-xl border-2 border-slate-300 bg-white px-4 py-3 text-xl text-slate-900 placeholder-slate-400 shadow-sm transition hover:border-slate-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-100 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-500; }
+  .checkbox { @apply h-5 w-5 cursor-pointer rounded border-slate-400 text-brand-600 focus:ring-brand-500; }
+
+  /* ---------- Buttons (all lift slightly on hover) ---------- */
+  .btn         { @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-base font-semibold shadow-sm transition duration-150 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:shadow-sm focus-visible:outline-none focus-visible:ring-4 disabled:pointer-events-none disabled:opacity-45 disabled:shadow-none; }
+  .btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800 focus-visible:ring-brand-200; }
+  .btn-accent  { @apply btn bg-accent-600 text-white hover:bg-accent-700 active:bg-accent-800 focus-visible:ring-accent-200; }
+  .btn-outline { @apply btn border-2 border-slate-300 bg-white text-slate-800 hover:border-brand-400 hover:bg-brand-50 hover:text-brand-800 active:bg-brand-100 focus-visible:ring-brand-100; }
+  .btn-danger  { @apply btn border-2 border-rose-200 bg-white text-rose-700 hover:border-rose-400 hover:bg-rose-50 active:bg-rose-100 focus-visible:ring-rose-100; }
+  .btn-light   { @apply btn bg-white/10 px-3 py-2 text-white ring-1 ring-white/30 hover:bg-white hover:text-brand-800 focus-visible:ring-white/50 sm:px-4; }
+  .spinner     { @apply h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent; }
+
+  /* ---------- Tabs and toggle groups ---------- */
+  .tab-list { @apply flex w-full gap-1 rounded-xl bg-slate-100 p-1.5 sm:w-auto; }
+  .tab      { @apply flex-1 rounded-lg px-5 py-2.5 text-lg font-semibold text-slate-600 transition hover:bg-white/70 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-200 disabled:pointer-events-none disabled:opacity-40; }
+  .tab[aria-selected="true"] { @apply bg-white text-brand-700 shadow; }
+  .tab[aria-pressed="true"]  { @apply bg-white text-brand-700 shadow; }
+
+  /* ---------- Header status badge ---------- */
+  .status-badge   { @apply inline-flex items-center gap-2 whitespace-nowrap rounded-full p-2.5 text-sm font-semibold ring-1 sm:px-4 sm:py-2 sm:text-base; }
+  .status-dot     { @apply h-3 w-3 rounded-full; }
+  .status-missing { @apply bg-amber-400/15 text-amber-100 ring-amber-300/50; }
+  .status-missing .status-dot { @apply bg-amber-300; }
+  .status-ready   { @apply bg-accent-400/15 text-accent-100 ring-accent-300/50; }
+  .status-ready .status-dot   { @apply bg-accent-400; }
+
+  /* ---------- Active key ---------- */
+  .active-key       { @apply mt-1 break-all font-mono text-2xl font-bold tracking-widest text-slate-900; }
+  .active-key-empty { @apply text-slate-400; }
+
+  /* ---------- Results ---------- */
+  .output-box   { @apply min-h-[5.5rem] break-words rounded-xl border-2 border-slate-200 bg-white px-5 py-4 font-mono text-2xl font-bold tracking-wider text-slate-900; }
+  .output-empty { @apply font-medium text-slate-400; }
+  .filler       { @apply rounded bg-amber-200 px-0.5 text-amber-900; }
+
+  /* ---------- 5x5 matrix (used by both matrices on the page) ---------- */
+  .matrix-grid   { @apply mx-auto grid w-full max-w-md grid-cols-5 gap-2 rounded-2xl border border-slate-200 bg-slate-100 p-3 sm:gap-3 sm:p-4; }
+  .matrix-empty  { @apply mx-auto flex aspect-square w-full max-w-md flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 p-6 text-center; }
+  .matrix-cell   { @apply relative flex aspect-square cursor-default select-none items-center justify-center rounded-xl border-2 font-mono text-2xl font-bold shadow-sm transition duration-200 sm:text-3xl; }
+  .matrix-cell-j { @apply absolute bottom-0.5 right-1.5 text-sm font-semibold opacity-70; }
+  /* Cell colours. Later rules win, so highlight states are listed last. */
+  .cell-plain   { @apply border-slate-200 bg-white text-slate-800; }
+  .cell-key     { @apply border-brand-200 bg-brand-50 text-brand-800; }
+  .cell-faded   { @apply border-slate-200 bg-white text-slate-400; }
+  .cell-region  { @apply border-amber-300 bg-amber-50 text-slate-900; }
+  .cell-cross   { @apply border-brand-400 ring-2 ring-brand-200; }
+  .cell-hovered { @apply z-10 -translate-y-0.5 border-brand-700 bg-brand-600 text-white shadow-md; }
+  .cell-input   { @apply z-10 scale-105 border-brand-700 bg-brand-600 text-white shadow-md; }
+  .cell-output  { @apply z-10 scale-105 border-accent-700 bg-accent-600 text-white shadow-md; }
+  .cell-both    { @apply z-10 scale-105 border-brand-700 bg-gradient-to-br from-brand-600 from-50% to-accent-600 to-50% text-white shadow-md; }
+
+  /* ---------- Legends under the matrices ---------- */
+  .legend        { @apply mt-4 flex flex-wrap justify-center gap-x-5 gap-y-2 text-base text-slate-700; }
+  .legend-item   { @apply inline-flex items-center gap-2; }
+  .legend-swatch { @apply h-4 w-4 rounded border-2; }
+
+  /* ---------- Letter-pair chips (step-by-step section) ---------- */
+  .chip       { @apply inline-flex items-center gap-1.5 rounded-lg border-2 border-slate-200 bg-white px-3 py-1.5 font-mono text-lg font-bold tracking-widest text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-400 hover:bg-brand-50 hover:shadow focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-200; }
+  .chip-arrow { @apply font-sans text-slate-400; }
+  .chip-out   { @apply text-accent-700; }
+  .chip[aria-pressed="true"] { @apply border-brand-700 bg-brand-600 text-white; }
+  .chip[aria-pressed="true"] .chip-arrow,
+  .chip[aria-pressed="true"] .chip-out { @apply text-white; }
+
+  /* ---------- Small labels ("pills") ---------- */
+  .pill           { @apply inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-base font-semibold ring-1; }
+  .pill-row       { @apply bg-sky-50 text-sky-800 ring-sky-200; }
+  .pill-column    { @apply bg-violet-50 text-violet-800 ring-violet-200; }
+  .pill-rectangle { @apply bg-rose-50 text-rose-800 ring-rose-200; }
+  .pill-encrypt   { @apply bg-brand-50 text-brand-800 ring-brand-200; }
+  .pill-decrypt   { @apply bg-accent-50 text-accent-800 ring-accent-200; }
+
+  /* ---------- Current step card ---------- */
+  .step-card   { @apply rounded-2xl border-2 border-slate-200 bg-white p-6 shadow-sm; }
+  .step-pair   { @apply mt-5 flex items-center gap-5 font-mono text-5xl font-extrabold tracking-widest sm:text-6xl; }
+
+  /* ---------- Info tiles (full details) ---------- */
+  .tile        { @apply rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-brand-200 hover:bg-white hover:shadow-sm; }
+  .tile-result { @apply border-accent-200 bg-accent-50 hover:border-accent-300; }
+  .tile-label  { @apply text-sm font-bold uppercase tracking-wider text-slate-600; }
+  .tile-value  { @apply mt-2 break-all font-mono text-lg text-slate-900; }
+
+  /* ---------- Rule cards ---------- */
+  .rule-card           { @apply rounded-2xl border-2 p-5 transition hover:-translate-y-0.5 hover:shadow-md; }
+  .rule-card-row       { @apply border-sky-200 bg-sky-50/60; }
+  .rule-card-column    { @apply border-violet-200 bg-violet-50/60; }
+  .rule-card-rectangle { @apply border-rose-200 bg-rose-50/60; }
+  .rule-card-title     { @apply text-lg font-bold text-slate-900; }
+
+  /* ---------- Table of all steps ---------- */
+  .table-wrap { @apply max-h-96 overflow-auto rounded-2xl border border-slate-200; }
+  .data-table { @apply min-w-full text-left text-base; }
+  .data-table th { @apply sticky top-0 bg-slate-100 px-4 py-3 text-sm font-bold uppercase tracking-wider text-slate-600; }
+  .data-table td { @apply border-t border-slate-100 px-4 py-3; }
+  .data-table tbody tr { @apply cursor-pointer transition hover:bg-brand-50/60; }
+  .data-table tbody tr[aria-selected="true"] { @apply bg-brand-50; }
+
+  /* ---------- Expandable "details" box ---------- */
+  .disclosure         { @apply rounded-2xl border-2 border-slate-200 transition hover:border-brand-300; }
+  .disclosure-summary { @apply flex cursor-pointer list-none items-center justify-between gap-3 rounded-2xl px-5 py-4 text-lg font-semibold text-brand-700 hover:bg-brand-50/60; }
+
+
+  /* ---------- History entries ---------- */
+  .history-item    { @apply rounded-2xl border border-slate-200 bg-white transition hover:border-brand-300 hover:shadow-md; }
+  .history-summary { @apply flex cursor-pointer list-none flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl p-4 hover:bg-slate-50; }
+  .history-text    { @apply mt-1 max-h-40 overflow-y-auto whitespace-pre-wrap break-all rounded-xl border border-slate-200 bg-slate-50 p-3 font-mono text-lg text-slate-800; }
+
+  /* ---------- Toast notifications ---------- */
+  .toast         { @apply pointer-events-auto flex w-full max-w-sm animate-slide-up items-start gap-3 rounded-2xl border p-4 text-base shadow-xl; }
+  .toast-icon    { @apply grid h-7 w-7 shrink-0 place-items-center rounded-full text-sm font-bold text-white; }
+  .toast-close   { @apply shrink-0 rounded-md px-2 text-xl leading-none opacity-60 transition hover:bg-black/5 hover:opacity-100; }
+  .toast-success { @apply border-accent-200 bg-accent-50 text-accent-900; }
+  .toast-success .toast-icon { @apply bg-accent-600; }
+  .toast-error   { @apply border-rose-200 bg-rose-50 text-rose-900; }
+  .toast-error .toast-icon   { @apply bg-rose-600; }
+  .toast-warning { @apply border-amber-200 bg-amber-50 text-amber-900; }
+  .toast-warning .toast-icon { @apply bg-amber-500; }
+  .toast-info    { @apply border-sky-200 bg-sky-50 text-sky-900; }
+  .toast-info .toast-icon    { @apply bg-sky-600; }
+}

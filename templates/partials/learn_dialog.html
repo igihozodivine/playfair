@@ -1,0 +1,46 @@
+<!-- "Learn Playfair" pop-up: a short summary of the cipher (logic: static/js/learn.js) -->
+<dialog id="learnDialog" class="dialog" aria-labelledby="learnTitle">
+  <div class="flex items-start justify-between gap-4 border-b border-slate-100 px-6 py-5">
+    <div>
+      <h2 id="learnTitle" class="text-2xl font-bold text-slate-900">The Playfair cipher</h2>
+      <p class="hint mt-1">Letters are encrypted in pairs using a 5&times;5 grid made from a key.</p>
+    </div>
+    <button id="learnCloseBtn" type="button" class="toast-close" aria-label="Close">&times;</button>
+  </div>
+
+  <ol class="space-y-5 px-6 py-6">
+    <li class="flex gap-4">
+      <span class="section-number">1</span>
+      <div>
+        <p class="font-semibold text-slate-900">Build the grid</p>
+        <p class="hint">Key letters first (no repeats), then the rest of the alphabet. I and J share a cell.</p>
+      </div>
+    </li>
+    <li class="flex gap-4">
+      <span class="section-number">2</span>
+      <div>
+        <p class="font-semibold text-slate-900">Split the text into pairs</p>
+        <p class="hint">
+          <span class="font-mono font-semibold text-slate-800">BALLOON &rarr; BA L<span class="filler">X</span> LO ON</span><br>
+          An X separates double letters and fills an odd ending.
+        </p>
+      </div>
+    </li>
+    <li class="flex gap-4">
+      <span class="section-number">3</span>
+      <div class="flex-1">
+        <p class="font-semibold text-slate-900">Replace each pair</p>
+        <ul class="mt-2 space-y-2 text-base">
+          <li class="flex flex-wrap items-center gap-2"><span class="pill pill-row">Same row</span> take the letter to the right</li>
+          <li class="flex flex-wrap items-center gap-2"><span class="pill pill-column">Same column</span> take the letter below</li>
+          <li class="flex flex-wrap items-center gap-2"><span class="pill pill-rectangle">Rectangle</span> swap the columns</li>
+        </ul>
+      </div>
+    </li>
+  </ol>
+
+  <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 bg-slate-50 px-6 py-4">
+    <p class="hint"><strong class="text-slate-800">Decrypt:</strong> do the reverse (left, up).</p>
+    <button id="learnOkBtn" type="button" class="btn-primary">Got it</button>
+  </div>
+</dialog>

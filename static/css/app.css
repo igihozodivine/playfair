@@ -1,0 +1,13 @@
+/*
+ * app.css - Plain CSS that is not part of Tailwind.
+ * Most styles live in templates/styles/components.css.
+ */
+
+/* Respect users who ask their system for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

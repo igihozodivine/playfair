@@ -1,0 +1,58 @@
+<!-- Section 1: secret key and the generated 5x5 matrix (logic: static/js/key.js) -->
+<section id="key-section" class="section" aria-labelledby="key-heading">
+  <div class="section-header">
+    <div class="section-heading">
+      <span class="section-number" aria-hidden="true">1</span>
+      <div>
+        <h2 id="key-heading" class="section-title">Secret key &amp; matrix</h2>
+        <p class="section-subtitle">Save a key once. Every encryption and decryption uses it.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-body grid gap-8 lg:grid-cols-2">
+    <!-- Left column: key form and active key -->
+    <div class="space-y-6">
+      <form id="keyForm" class="panel" novalidate>
+        <label for="keyInput" class="label">Secret key</label>
+        <input id="keyInput" type="text" autocomplete="off" spellcheck="false" maxlength="200"
+               class="field font-mono uppercase tracking-wider placeholder:normal-case placeholder:tracking-normal"
+               placeholder="e.g. PLAYFAIR EXAMPLE" aria-describedby="keyPreview">
+        <p id="keyPreview" class="hint mt-2 hidden" aria-live="polite">
+          Key letters used: <span id="keyPreviewValue" class="font-mono font-bold tracking-widest text-brand-700"></span>
+        </p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <button id="saveKeyBtn" type="submit" class="btn-primary">Save key</button>
+          <button id="changeKeyBtn" type="button" class="btn-outline" disabled>Change key</button>
+        </div>
+      </form>
+
+      <div class="panel">
+        <p class="label mb-1">Active key</p>
+        <p id="activeKeyDisplay" class="active-key active-key-empty">Not set</p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <button id="toggleKeyBtn" type="button" class="btn-outline" disabled aria-pressed="false">Show key</button>
+          <button id="forgetKeyBtn" type="button" class="btn-danger" disabled>Forget key</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column: the matrix -->
+    <div>
+      <p class="label text-center lg:text-left">5&times;5 matrix</p>
+      <div id="matrixEmpty" class="matrix-empty">
+        <p class="text-xl font-semibold text-slate-700">No matrix yet</p>
+        <p class="hint mt-1">Save a key to generate it.</p>
+      </div>
+      <div id="matrixGrid" class="matrix-grid hidden" role="grid" aria-label="Playfair cipher matrix"></div>
+      <div id="matrixInfo" class="hidden">
+        <p id="matrixCaption" class="hint mt-4 text-center" aria-live="polite"></p>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-swatch cell-key"></span>From the key</span>
+          <span class="legend-item"><span class="legend-swatch cell-plain"></span>Rest of the alphabet</span>
+          <span class="legend-item"><span class="font-mono font-bold">I/J</span> share one cell</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+  index.html - The single page of the application.
+  Each section lives in its own file in templates/partials/ so it is easy to find and edit.
+-->
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playfair Cipher</title>
+  <meta name="description" content="Encrypt and decrypt text with the classical Playfair cipher, with a step-by-step visual explanation.">
+
+  <!-- Fonts: Inter for text, JetBrains Mono for letters and ciphertext -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS, then our theme (colours, fonts, animations) -->
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="{{ url_for('static', filename='js/tailwind.config.js') }}"></script>
+
+  <!-- Our reusable style classes (templates/styles/components.css) -->
+  <style type="text/tailwindcss">
+{% include "styles/components.css" %}
+  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+
+<body>
+  {% include "partials/header.html" %}
+
+  <main class="mx-auto max-w-6xl space-y-6 px-4 py-6 sm:space-y-8 sm:px-6 sm:py-8 lg:px-8">
+    {% include "partials/key_section.html" %}
+    {% include "partials/workspace.html" %}
+    {% include "partials/steps.html" %}
+    {% include "partials/history.html" %}
+  </main>
+
+  {% include "partials/learn_dialog.html" %}
+
+  <!-- Notifications appear here (bottom-right) -->
+  <div id="toasts" class="pointer-events-none fixed inset-x-4 bottom-4 z-50 flex flex-col items-center gap-3 sm:inset-x-auto sm:right-6 sm:items-end" aria-live="assertive"></div>
+
+  <!-- App logic: static/js/main.js loads the other modules -->
+  <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
